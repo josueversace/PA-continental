@@ -16,7 +16,7 @@ void Reporte();
 int cantquej1=0, cantFtip4=0, canttip2M=0;
 int tipoqueja = 0, tipocliente;
 int rm = 0, rh = 0;
-float totaltres = 0;
+float totaltres=0, precio3=0;
 float  acum=0, total=0, acumtipo2=0, pagotipo2=0, contadortipo2=0;
 float Precio(int producto, int tipo);
 
@@ -179,8 +179,63 @@ void RegistroAreas(int n)
 		montotal = brutototal + montoIgv;
 		acum = montotal + acum;
 
-		cout << "\n\nTotal		: " << brutototal << endl;
-		cout << "IGV		: " << montoIgv << endl;
+		cout << "\n\nTota                : " << brutototal << endl;
+		cout << "IGV                  : " << montoIgv << endl;
 		cout << "Monto Total a pagar  : " << montotal << endl;
+	}
+	// Acumulador x tipo queja
+	switch(tipoqueja)
+	{
+		case 1:
+			cantquej1++;
+			break;
+		case 2:
+			acumtipo2 = acumtipo2 + (pago * 1.18);
+			contadortipo2++;
+		case 3:
+			break;
+		case 4:
+			break;
+	}
+
+	// Acumulador x tipo cliente
+	switch (tipocliente)
+	{
+	case 1:
+		if (tipoprod == 3)
+		{
+			totaltres = totaltres + (pago * 1.18);
+		}
+
+		break;
+	case 2:
+		if (genero == 'M')
+		{
+			canttip2M++;
+		}
+		break;
+	case 3:
+
+		break;
+	}
+
+	// Acumulador x tipo producto
+	switch (tipoprod)
+	{
+	case 1:
+
+		break;
+	case 2:
+
+		break;
+	case 3:
+
+		break;
+	case 4:
+		if(genero=='F')
+		{
+			cantFtip4++;
+		}
+		break;
 	}
 }
