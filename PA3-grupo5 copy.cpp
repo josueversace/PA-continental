@@ -15,7 +15,7 @@ void Reporte();
 
 int cantquej1=0, cantFtip4=0, canttip2M=0;
 int tipoqueja = 0, tipocliente;
-int rm = 0, rh = 0;
+int rm = 0, rh = 0, todo;
 float totaltres=0, precio3=0;
 float  acum=0, total=0, acumtipo2=0, pagotipo2=0, contadortipo2=0;
 float Precio(int producto, int tipo);
