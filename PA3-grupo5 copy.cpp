@@ -11,14 +11,15 @@ using namespace std;
 void Opciones();
 void RegistroAreas(int n);
 void Reporte();
+void Salir();
 
 
 int cantquej1=0, cantFtip4=0, canttip2M=0;
 int tipoqueja = 0, tipocliente;
-int rm = 0, rh = 0, todo;
-float totaltres=0, precio3=0;
+float totaltres=0, precio3=0, Promquej2=0;
 float  acum=0, total=0, acumtipo2=0, pagotipo2=0, contadortipo2=0;
 float Precio(int producto, int tipo);
+char res;
 
 int main()
 {
@@ -35,14 +36,18 @@ void Opciones()
 
 	do
 	{
-		cout<<"\n       Menu de Opciones   \n";
-		cout<<"-------------------------------------\n";
+		cout<<"+-------------------------------------+\n";
+		cout<<"|             Menu de Opciones        |\n";     
+		cout<<"+-------------------------------------+\n";
 		cout<<"[1]. REGISTRAR QUEJAS \n";
 		cout<<"[2]. REPORTE DE QUEJAS\n";
 		cout<<"[3]. SALIR \n";
 		cout<<"-------------------------------------";
 		cout<<"\nSeleccione una opcion: ";
 		cin>>opc;
+		if (opc<1 || opc>3)
+			cout <<"\nError... digite una opcion valida!   \n"<<endl;
+		
 		switch (opc)
 		{
 		case 1:
@@ -53,12 +58,15 @@ void Opciones()
 		case 2:
 			Reporte();
 			break;
-			
+		
+		case 3:
+			Salir();
+			break;
 		}
 	}while(opc!=3);
-	cout<<"\n _____________________________\n";
-	cout<<"\n ***** SESION FINALIZADA *****\n";
-	cout<<"\n -----------------------------\n\n\n";
+	cout<<"+-------------------------------------+\n";
+	cout<<"|            SESION FINALIZADA        |\n";
+	cout<<"+-------------------------------------+\n";
 }
 
 float xPrecio(int tipo)
@@ -88,7 +96,7 @@ void Reporte()
 	cout<<"Nro de quejas registradas de Tipo de Clientes 2 & Gnro 'M' 	: "<<canttip2M<<endl;
 	cout<<"Monto total de Importe Neto                                     : "<<acum<<endl; 
 	cout<<"Monto total de Importe Neto de Tipo de Clte 1 & Tipo de pdto 3  : "<<totaltres<<endl;
-	cout<<"Prom. Importe Neto de Tipo de Quejas 2                          : " << acumtipo2 / contadortipo2 << endl;
+	cout<<"Prom. Importe Neto de Tipo de Quejas 2                          : " <<Promquej2<< endl;
 	cout << "---------------------------------------------------------------" << endl;
 	
 }
@@ -97,12 +105,11 @@ void RegistroAreas(int n)
 {
 	string name;
 	char genero, cantquej;
-	int m1 = 0, m2 = 0, m3 = 0, m4=0, f1=0,f2=0,f3=0,f4=0;
 	int cantidad, tipoprod;
-	float precio, pago, montopago, montoIgv, igv = 0.18, montotal, brutototal, Precio;
+	float montopago, montoIgv, igv = 0.18, montotal, brutototal;
 
 	
-	cout << "Ingrese nombre:  ";
+	cout << "\nIngrese nombre:  ";
 	name = leedatoc();
 	cin>> name;
 
@@ -111,7 +118,7 @@ void RegistroAreas(int n)
 
 	do
 	{
-		cout << "Ingrese tipo de cliente (1. Empresa   2. Distribuidor   3. Directo) ";
+		cout << "\nIngrese tipo de cliente (1. Empresa   2. Distribuidor   3. Directo) : ";
 		tipocliente = leedatoePositivos();
 		if (tipocliente <= 0 || tipocliente > 3)
 			cout << "Error, Ingrese una opcion valida";
@@ -120,10 +127,10 @@ void RegistroAreas(int n)
 	// genero
 	do
 	{
-		cout << "Ingrese genero  :" << endl;
+		cout << "\n====Ingrese genero====  :" << endl;
 		cout << "M. Masculino" << endl;
 		cout << "F. Femenino" << endl;
-		cout << "Ingrese opcion  :" << endl;
+		cout << "Ingrese opcion  : " ;
 		genero = leedatoc();
 		genero = toupper(genero);
 		if (genero != 'M' && genero != 'F')
@@ -138,7 +145,7 @@ void RegistroAreas(int n)
 		cout << "2. Pintura Esmalte" << endl;
 		cout << "3. Pintura Imprimación" << endl;
 		cout << "4. Pintura Mineralseca  :" << endl;
-		cout << "Ingrese opcion	:	" << endl;
+		cout << "Ingrese opcion	:	 " ;
 
 		tipoprod = leedatoePositivos(); // 4
 		if (tipoprod != 1 and tipoprod != 2 and tipoprod != 3 and tipoprod != 4)
@@ -148,11 +155,11 @@ void RegistroAreas(int n)
 	
 	// cantidad de quejas
 	do
-	{ cout<<"\n\nIngrese la cantidad quejas: ";
+	{ cout<<"\nIngrese la cantidad quejas: ";
 		cantquej=leedatoePositivos();
-		if(cantquej<0 || cantquej>4)
+		if(cantquej<0 || cantquej>3)
 			cout<<"Error, ingreso dato errado"<<endl;
-	} while (cantquej<0 || cantquej>4);
+	} while (cantquej<0 || cantquej>3);
 
 	for(int i=1;i<=cantquej;i++)
 	{
@@ -161,11 +168,11 @@ void RegistroAreas(int n)
 		// TIPO DE QUEJA
 		do
 		{
-			cout << "\n ======MOTIVO de QUEJA====== " << endl;
+			cout << " ======MOTIVO de QUEJA====== " << endl;
 			cout << "1. Pintura seca  " << endl;
 			cout << "2. Mal servicio " << endl;
 			cout << "3. Cobro errado " << endl;
-			cout << "4. Cambio de pintura : " << endl;
+			cout << "4. Cambio de pintura : " ;
 
 			tipoqueja = leedatoePositivos(); // 4
 			if (tipoqueja != 1 and tipoqueja != 2 and tipoqueja != 3 and tipoqueja != 4)
@@ -173,69 +180,87 @@ void RegistroAreas(int n)
 		} while (tipoqueja != 1 and tipoqueja != 2 and tipoqueja != 3 and tipoqueja != 4);
 
 
-
 		brutototal= xPrecio(tipoqueja);
 		montoIgv = igv * brutototal;
 		montotal = brutototal + montoIgv;
 		acum = montotal + acum;
+		Promquej2 = acumtipo2 / contadortipo2;
 
 		cout << "\n\nTota                : " << brutototal << endl;
 		cout << "IGV                  : " << montoIgv << endl;
 		cout << "Monto Total a pagar  : " << montotal << endl;
-	}
-	// Acumulador x tipo queja
-	switch(tipoqueja)
-	{
+
+		// Acumulador x tipo queja
+		switch(tipoqueja)
+		{
 		case 1:
 			cantquej1++;
 			break;
 		case 2:
-			acumtipo2 = acumtipo2 + (pago * 1.18);
+			acumtipo2 = acumtipo2 + montotal;
 			contadortipo2++;
 		case 3:
 			break;
 		case 4:
 			break;
-	}
+			
+		}
 
-	// Acumulador x tipo cliente
-	switch (tipocliente)
-	{
-	case 1:
+	   // Acumulador x tipo cliente
+	   switch (tipocliente)
+		{
+		case 1:
 		if (tipoprod == 3)
 		{
-			totaltres = totaltres + (pago * 1.18);
+			totaltres = totaltres + montotal;
 		}
 
 		break;
-	case 2:
+		case 2:
 		if (genero == 'M')
 		{
 			canttip2M++;
 		}
 		break;
-	case 3:
+		case 3:
 
 		break;
-	}
+		}
 
-	// Acumulador x tipo producto
-	switch (tipoprod)
-	{
-	case 1:
-
-		break;
-	case 2:
+		// Acumulador x tipo producto
+		switch (tipoprod)
+		{
+		case 1:
 
 		break;
-	case 3:
+		case 2:
 
 		break;
-	case 4:
+		case 3:
+
+		break;
+		case 4:
 		if(genero=='F')
 		{
 			cantFtip4++;
 		}
 		break;
-	}
+		}
+	}	
+
 }
+
+void Salir()
+
+	{
+		do
+		{
+		cout << "\n\tEstas seguro que desea salir (s/n)?: " << endl;
+		res = leedatoc();
+		res = toupper(res);
+		if (res != 'S' )
+			Opciones();
+		} while (res != 'S' );
+		
+		
+	}
